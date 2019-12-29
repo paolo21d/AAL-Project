@@ -52,4 +52,67 @@ int *Compare::generateInput(int length, int maxHeight) {
     }
     return field;
 }
+std::pair<long long int, long long int> Compare::statisticTimeBoth(int length, int maxHeight, int quantityOfTries) {
+    OptimalResolver optimalResolver;
+    BrutforceResolver brutforceResolver;
+    auto *optTimes = new long long int[quantityOfTries];
+    auto *brutTimes = new long long int[quantityOfTries];
+    for (int k = 0; k < quantityOfTries; ++k) {
+        int *input = generateInput(length, maxHeight);
+        optTimes[k] = optimalResolver.resultTime(length, input);
+        brutTimes[k] = brutforceResolver.resultTime(length, input);
+        delete[] input;
+    }
+
+    //policzenie sredniego czasu
+    long long int optSumOfTime = 0;
+    long long int brutSumOfTime = 0;
+    for (int k = 0; k < quantityOfTries; ++k) {
+        optSumOfTime += optTimes[k];
+        brutSumOfTime += brutTimes[k];
+    }
+    long long int optAverageTime = optSumOfTime / quantityOfTries;
+    long long int brutAverageTime = brutSumOfTime / quantityOfTries;
+    delete[] optTimes;
+    delete[] brutTimes;
+    return pair<long long int, long long int>(optAverageTime, brutAverageTime);
+}
+
+long long int Compare::statisticTimeOptimal(int length, int maxHeight, int quantityOfTries) {
+    OptimalResolver resolver;
+    auto *optTimes = new long long int[quantityOfTries];
+    for (int k = 0; k < quantityOfTries; ++k) {
+        int *input = generateInput(length, maxHeight);
+        optTimes[k] = resolver.resultTime(length, input);
+        delete[] input;
+    }
+
+    //policzenie sredniego czasu
+    long long int optSumOfTime = 0;
+    for (int k = 0; k < quantityOfTries; ++k) {
+        optSumOfTime += optTimes[k];
+    }
+    long long int optAverageTime = optSumOfTime / quantityOfTries;
+    delete[] optTimes;
+    return optAverageTime;
+}
+
+long long int Compare::statisticTimeBrutforce(int length, int maxHeight, int quantityOfTries) {
+    BrutforceResolver resolver;
+    auto *brutTimes = new long long int[quantityOfTries];
+    for (int k = 0; k < quantityOfTries; ++k) {
+        int *input = generateInput(length, maxHeight);
+        brutTimes[k] = resolver.resultTime(length, input);
+        delete[] input;
+    }
+
+    //policzenie sredniego czasu
+    long long int brutSumOfTime = 0;
+    for (int k = 0; k < quantityOfTries; ++k) {
+        brutSumOfTime += brutTimes[k];
+    }
+    long long int brutAverageTime = brutSumOfTime / quantityOfTries;
+    delete[] brutTimes;
+    return brutAverageTime;
+}
 

@@ -6,21 +6,13 @@
 #define SECONDSTEP_OPTIMALRESOLVER_H
 
 
-class OptimalResolver {
-private:
-    int lengthOfField;
-    int *field;
-    int wormHead, wormAss, maxCapacity;
+#include "Resolver.h"
 
+class OptimalResolver: public Resolver {
 public:
     int getResult(int length, int *field);
-    long long int resultTime(int length, int *field);
 private:
-    void checkCapacity();
     void reverseField();
-    int getCurrentCapacity();
-    int lengthOfWorm();
-    int minWorm();
 };
 
 

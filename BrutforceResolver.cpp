@@ -3,8 +3,8 @@
 //
 
 #include "BrutforceResolver.h"
-#include <chrono>
 using namespace std;
+
 int BrutforceResolver::getResult(int argLength, int *argField) {
     lengthOfField = argLength;
     field = argField;
@@ -31,27 +31,4 @@ int BrutforceResolver::getResult(int argLength, int *argField) {
     }
 
     return maxCapacity;
-}
-void BrutforceResolver::checkCapacity() {
-    int capacity = getCurrentCapacity();
-    //cout << "CheckCapacity: length " << lengthOfWorm() << " minWorm " << minWorm() << " capacity " << capacity << endl;
-    if (capacity > maxCapacity)
-        maxCapacity = capacity;
-}
-int BrutforceResolver::getCurrentCapacity() {
-    return minWorm() * lengthOfWorm();
-}
-int BrutforceResolver::lengthOfWorm() {
-    return wormHead - wormAss;
-}
-int BrutforceResolver::minWorm() {
-    return min(field[wormHead], field[wormAss]);
-}
-long long int BrutforceResolver::resultTime(int argLength, int *argField) {
-    chrono::steady_clock::time_point begin, optEnd;
-    begin = chrono::steady_clock::now();
-    getResult(argLength, argField);
-    optEnd = chrono::steady_clock::now();
-    long long int calculationTime = chrono::duration_cast<chrono::microseconds>(optEnd - begin).count();
-    return calculationTime;
 }

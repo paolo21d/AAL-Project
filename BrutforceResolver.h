@@ -7,21 +7,11 @@
 
 #include <iostream>
 #include <cmath>
+#include "Resolver.h"
 
-class BrutforceResolver {
-private:
-    int lengthOfField;
-    int *field;
-    int wormHead, wormAss, maxCapacity;
-
+class BrutforceResolver: public Resolver {
 public:
     int getResult(int length, int *field);
-    long long int resultTime(int length, int *field);
-private:
-    void checkCapacity();
-    int getCurrentCapacity();
-    int lengthOfWorm();
-    int minWorm();
 };
 
 
