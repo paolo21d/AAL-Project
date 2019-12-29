@@ -3,6 +3,7 @@
 //
 
 #include "BrutforceResolver.h"
+#include <chrono>
 using namespace std;
 int BrutforceResolver::getResult(int argLength, int *argField) {
     lengthOfField = argLength;
@@ -45,4 +46,12 @@ int BrutforceResolver::lengthOfWorm() {
 }
 int BrutforceResolver::minWorm() {
     return min(field[wormHead], field[wormAss]);
+}
+long long int BrutforceResolver::resultTime(int argLength, int *argField) {
+    chrono::steady_clock::time_point begin, optEnd;
+    begin = chrono::steady_clock::now();
+    getResult(argLength, argField);
+    optEnd = chrono::steady_clock::now();
+    long long int calculationTime = chrono::duration_cast<chrono::microseconds>(optEnd - begin).count();
+    return calculationTime;
 }

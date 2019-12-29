@@ -27,27 +27,27 @@ void optimalTimer() {
     int quantityOfTries = 1000; //ilość próbek na krok
     int maxHeight = 20;
 
-    chrono::steady_clock::time_point begin, end;
-    auto *times = new long long int[quantityOfTries];
+    chrono::steady_clock::time_point optBegin, optEnd;
+    auto *optTimes = new long long int[quantityOfTries];
     for (int i = 1; i <= stepsQuantity; ++i) {
         int step = stepSize * i + stepOffset;
         for (int k = 0; k < quantityOfTries; ++k) {
             int *input = compare.generateInput(step, maxHeight);
-            begin = chrono::steady_clock::now();
+            optBegin = chrono::steady_clock::now();
             resolver.getResult(step, input);
-            end = chrono::steady_clock::now();
-            times[k] = chrono::duration_cast<chrono::microseconds>(end - begin).count();
+            optEnd = chrono::steady_clock::now();
+            optTimes[k] = chrono::duration_cast<chrono::microseconds>(optEnd - optBegin).count();
             delete[] input;
         }
 
         //policzenie sredniego czasu
-        long long int sumOfTime = 0;
+        long long int optSumOfTime = 0;
         for (int k = 0; k < quantityOfTries; ++k) {
-            sumOfTime += times[k];
+            optSumOfTime += optTimes[k];
         }
-        long long int averageTime = sumOfTime / quantityOfTries;
+        long long int optAverageTime = optSumOfTime / quantityOfTries;
 
-        cout << "LENGTH\t" << step << "\tTIME\t" << averageTime << endl;
+        cout << "LENGTH\t" << step << "\tTIME\t" << optAverageTime << endl;
     }
-    delete[] times;
+    delete[] optTimes;
 }

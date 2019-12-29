@@ -14,7 +14,7 @@ private:
 
 public:
     int getResult(int length, int *field);
-
+    long long int resultTime(int length, int *field);
 private:
     void checkCapacity();
     void reverseField();

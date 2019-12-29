@@ -4,6 +4,7 @@
 
 #include "OptimalResolver.h"
 #include <iostream>
+#include <chrono>
 using namespace std;
 
 int OptimalResolver::getResult(int argLength, int *argField) {
@@ -61,4 +62,12 @@ int OptimalResolver::lengthOfWorm() {
 }
 int OptimalResolver::minWorm() {
     return min(field[wormHead], field[wormAss]);
+}
+long long int OptimalResolver::resultTime(int argLength, int *argField) {
+    chrono::steady_clock::time_point begin, optEnd;
+    begin = chrono::steady_clock::now();
+    getResult(argLength, argField);
+    optEnd = chrono::steady_clock::now();
+    long long int calculationTime = chrono::duration_cast<chrono::microseconds>(optEnd - begin).count();
+    return calculationTime;
 }
