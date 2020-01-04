@@ -2,6 +2,7 @@
 #include "Compare.h"
 
 using namespace std;
+
 void optimalTimer();
 
 int main() {
@@ -25,10 +26,11 @@ void optimalTimer() {
     int maxHeight = 20;
 
     auto *optTimes = new long long int[quantityOfTries];
+    cout << "LENGTH TIME[ms]" << endl;
     for (int i = 1; i <= stepsQuantity; ++i) {
         int step = stepSize * i + stepOffset;
         long long int optAverageTime = compare.statisticTimeOptimal(step, maxHeight, quantityOfTries);
-        cout << "LENGTH\t" << step << "\tTIME\t" << optAverageTime << endl;
+        cout << step << " " << optAverageTime << endl;
     }
     delete[] optTimes;
 }
