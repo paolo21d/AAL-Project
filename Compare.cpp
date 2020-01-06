@@ -14,7 +14,7 @@ bool Compare::compareResults(int length, int maxHeight, int quantityOfTries) {
     int optimalResult, brutforceResult;
     chrono::steady_clock::time_point optBegin, optEnd, brutBegin, brutEnd;
     for (int i = 0; i < quantityOfTries; ++i) {
-        cout << "Try no " << i << endl;
+        //cout << "Try no " << i << endl;
         int *input = generateInput(length, maxHeight);
 
         //optimal
@@ -29,8 +29,8 @@ bool Compare::compareResults(int length, int maxHeight, int quantityOfTries) {
         brutEnd = chrono::steady_clock::now();
         //cout << "Brute: " << brutforceResult << endl;
 
-        cout << "OPT\t" << chrono::duration_cast<chrono::microseconds>(optEnd - optBegin).count()
-             << "\tBRT\t" << chrono::duration_cast<chrono::microseconds>(brutEnd - brutBegin).count() << endl;
+        /*cout << "OPT\t" << chrono::duration_cast<chrono::microseconds>(optEnd - optBegin).count()
+             << "\tBRT\t" << chrono::duration_cast<chrono::microseconds>(brutEnd - brutBegin).count() << endl;*/
         if (optimalResult != brutforceResult) {
             cout << "ERROR" << endl << length << endl;
             for (int j = 0; j < length; j++) {
