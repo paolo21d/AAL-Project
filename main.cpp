@@ -157,12 +157,21 @@ void batchMode(int argc, char *argv[]) {
 
 void optimalStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSteps, int quantityOfTries) {
 	Compare compare;
-	cout << "LENGTH TIME[ms]" << endl;
+	cout << "LENGTH\tTIME[ms]\tq(LENGTH)" << endl;
+	auto *optimalTimes = new long long int[quantityOfSteps];
 	for (int i = 0; i < quantityOfSteps; ++i) {
 		int step = stepSize * i + offset;
-		long long int optAverageTime = compare.statisticTimeOptimal(step, maxHeight, quantityOfTries);
-		cout << step << " " << optAverageTime << endl;
+		optimalTimes[i] = compare.statisticTimeOptimal(step, maxHeight, quantityOfTries);
 	}
+
+	double timeMedian = optimalTimes[quantityOfSteps / 2];
+	double expectedTimeMedian = (double) stepSize * (double) quantityOfSteps / 2.0 + (double) offset;
+	for (int i = 0; i < quantityOfSteps; ++i) {
+		int step = stepSize * i + offset;
+		double q = ((double) optimalTimes[i] * expectedTimeMedian) / ((double) step * timeMedian);
+		cout << step << "\t" << optimalTimes[i] << "\t" << q << endl;
+	}
+	delete[] optimalTimes;
 }
 
 void bothStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSteps, int quantityOfTries) {
