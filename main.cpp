@@ -159,41 +159,61 @@ void optimalStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSte
 	Compare compare;
 	cout << "LENGTH\tTIME[ms]\tq(LENGTH)" << endl;
 	auto *optimalTimes = new long long int[quantityOfSteps];
+	auto *expectedTimes = new int[quantityOfSteps];
 	for (int i = 0; i < quantityOfSteps; ++i) {
 		int step = stepSize * i + offset;
 		optimalTimes[i] = compare.statisticTimeOptimal(step, maxHeight, quantityOfTries);
+		expectedTimes[i] = step;
 	}
 
 	double timeMedian = optimalTimes[quantityOfSteps / 2];
-	double expectedTimeMedian = (double) stepSize * (double) quantityOfSteps / 2.0 + (double) offset;
+	double expectedTimeMedian = expectedTimes[quantityOfSteps / 2];
 	for (int i = 0; i < quantityOfSteps; ++i) {
 		int step = stepSize * i + offset;
-		double q = ((double) optimalTimes[i] * expectedTimeMedian) / ((double) step * timeMedian);
+		double q = ((double) optimalTimes[i] * expectedTimeMedian) / ((double) expectedTimes[i] * timeMedian);
 		cout << step << "\t" << optimalTimes[i] << "\t" << q << endl;
 	}
 	delete[] optimalTimes;
+	delete[] expectedTimes;
 }
 
 void bothStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSteps, int quantityOfTries) {
 	Compare compare;
-	auto *optimalTimes = new long long int[quantityOfTries];
-	auto *brutforceTimes = new long long int[quantityOfTries];
+	auto *optimalTimes = new long long int[quantityOfSteps];
+	auto *optimalExpectedTimes = new int[quantityOfSteps];
+	auto *brutforceTimes = new long long int[quantityOfSteps];
+	auto *brutforceExpectedTimes = new int[quantityOfSteps];
 	for (int i = 0; i < quantityOfSteps; ++i) {
 		int step = stepSize * i + offset;
 		pair<long long int, long long int> times = compare.statisticTimeBoth(step, maxHeight, quantityOfTries);
 		optimalTimes[i] = times.first;
+		optimalExpectedTimes[i] = step;
 		brutforceTimes[i] = times.second;
+		brutforceExpectedTimes[i] = step * step;
 	}
 
-	cout << "OPTIMAL: length\ttime[ms]" << endl;
+	cout << "OPTIMAL: length\ttime[ms]\tQ[n]" << endl;
+	double optimalTimeMedian = optimalTimes[quantityOfSteps / 2];
+	double optimalExpectedTimeMedian = optimalExpectedTimes[quantityOfSteps / 2];
 	for (int i = 0; i < quantityOfSteps; ++i) {
-		cout << stepSize * i + offset << "\t" << optimalTimes[i] << endl;
+		int step = stepSize * i + offset;
+		double q = ((double) optimalTimes[i] * optimalExpectedTimeMedian) /
+				   ((double) optimalExpectedTimes[i] * optimalTimeMedian);
+		cout << step << "\t" << optimalTimes[i] << "\t" << q << endl;
 	}
-	cout << "BRUTFORCE: length\ttime[ms]" << endl;
+
+	cout << "BRUTFORCE: length\ttime[ms]\tQ[n]" << endl;
+	double brutforceTimeMedian = brutforceTimes[quantityOfSteps / 2];
+	double brutforceExpectedTimeMedian = brutforceExpectedTimes[quantityOfSteps / 2];
 	for (int i = 0; i < quantityOfSteps; ++i) {
-		cout << stepSize * i + offset << "\t" << brutforceTimes[i] << endl;
+		int step = stepSize * i + offset;
+		double q = ((double) brutforceTimes[i] * brutforceExpectedTimeMedian) /
+				   ((double) brutforceExpectedTimes[i] * brutforceTimeMedian);
+		cout << step << "\t" << brutforceTimes[i] << "\t" << q << endl;
 	}
 
 	delete[] optimalTimes;
+	delete[] optimalExpectedTimes;
 	delete[] brutforceTimes;
+	delete[] brutforceExpectedTimes;
 }
