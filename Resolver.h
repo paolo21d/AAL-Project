@@ -10,7 +10,7 @@ class Resolver {
 protected:
     int lengthOfField;
     int *field;
-    int wormHead, wormAss, maxCapacity;
+    int wormHead, wormTail, maxCapacity;
 
 public:
     virtual int getResult(int length, int *field) = 0;

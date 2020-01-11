@@ -16,17 +16,6 @@ void optimalStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSte
 void bothStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSteps, int quantityOfTries);
 
 int main(int argc, char *argv[]) {
-	Compare compare;
-	int fieldLength = 500000;
-	int maxHeight = 15;
-	int quantityOfTries = 100;
-
-	//bool result = compare.compareResults(fieldLength, maxHeight, quantityOfTries);
-	//cout << "RESULT OF COMPARISON: " << result;
-
-	//optimalTimer();
-	//compare.compareResults(5000, 200, 1000000);
-
 	if (argc >= 2) {
 		batchMode(argc, argv);
 	} else {

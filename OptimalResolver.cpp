@@ -10,32 +10,27 @@ int OptimalResolver::getResult(int argLength, int *argField) {
     lengthOfField = argLength;
     field = argField;
     wormHead = 1;
-    wormAss = 0;
-    maxCapacity = min(field[wormHead], field[wormAss]);
+	wormTail = 0;
+    maxCapacity = min(field[wormHead], field[wormTail]);
 
     while (wormHead < lengthOfField) {
-        //cout<<field[wormAss]<<" "<<field[wormHead]<<endl;
-        if (field[wormHead] >= field[wormAss]) {
+        if (field[wormHead] >= field[wormTail]) {
             checkCapacity();
-            wormAss = wormHead;
-            //cout<<"ass: "<<field[wormAss]<<" head: "<<field[wormHead]<<endl;
+			wormTail = wormHead;
         }
         wormHead++;
     }
 
     //reverse
     reverseField();
-    //cout<<endl<<"REVERSE!!!"<<endl;
 
     wormHead = 1;
-    wormAss = 0;
+	wormTail = 0;
 
     while (wormHead < lengthOfField) {
-        //cout<<field[wormAss]<<" "<<field[wormHead]<<endl;
-        if (field[wormHead] >= field[wormAss]) {
+        if (field[wormHead] >= field[wormTail]) {
             checkCapacity();
-            wormAss = wormHead;
-            //cout<<"ass: "<<field[wormAss]<<" head: "<<field[wormHead]<<endl;
+			wormTail = wormHead;
         }
         wormHead++;
     }

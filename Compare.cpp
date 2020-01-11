@@ -12,25 +12,16 @@ bool Compare::compareResults(int length, int maxHeight, int quantityOfTries) {
     BrutforceResolver brutforceResolver;
     OptimalResolver optimalResolver;
     int optimalResult, brutforceResult;
-    chrono::steady_clock::time_point optBegin, optEnd, brutBegin, brutEnd;
     for (int i = 0; i < quantityOfTries; ++i) {
         //cout << "Try no " << i << endl;
         int *input = generateInput(length, maxHeight);
 
         //optimal
-        optBegin = chrono::steady_clock::now();
         optimalResult = optimalResolver.getResult(length, input);
-        optEnd = chrono::steady_clock::now();
-        //cout << "Optimal: " << optimalResult << endl;
 
         //brut
-        brutBegin = chrono::steady_clock::now();
         brutforceResult = brutforceResolver.getResult(length, input);
-        brutEnd = chrono::steady_clock::now();
-        //cout << "Brute: " << brutforceResult << endl;
 
-        /*cout << "OPT\t" << chrono::duration_cast<chrono::microseconds>(optEnd - optBegin).count()
-             << "\tBRT\t" << chrono::duration_cast<chrono::microseconds>(brutEnd - brutBegin).count() << endl;*/
         if (optimalResult != brutforceResult) {
             cout << "ERROR" << endl << length << endl;
             for (int j = 0; j < length; j++) {
@@ -64,7 +55,7 @@ std::pair<long long int, long long int> Compare::statisticTimeBoth(int length, i
         delete[] input;
     }
 
-    //policzenie sredniego czasu
+    //counting average time
     long long int optSumOfTime = 0;
     long long int brutSumOfTime = 0;
     for (int k = 0; k < quantityOfTries; ++k) {
@@ -87,7 +78,7 @@ long long int Compare::statisticTimeOptimal(int length, int maxHeight, int quant
         delete[] input;
     }
 
-    //policzenie sredniego czasu
+	//counting average time
     long long int optSumOfTime = 0;
     for (int k = 0; k < quantityOfTries; ++k) {
         optSumOfTime += optTimes[k];

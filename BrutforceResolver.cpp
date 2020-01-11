@@ -9,16 +9,15 @@ int BrutforceResolver::getResult(int argLength, int *argField) {
     lengthOfField = argLength;
     field = argField;
     wormHead = 1;
-    wormAss = 0;
+	wormTail = 0;
     maxCapacity = 0;
 
-    for (wormAss = 0; wormAss < lengthOfField - 1; wormAss++) {
-        wormHead = wormAss + 1;
+    for (wormTail = 0; wormTail < lengthOfField - 1; wormTail++) {
+        wormHead = wormTail + 1;
         int tempMax = field[wormHead];
         checkCapacity();
         for (; wormHead < lengthOfField; wormHead++) {
-            //cout<<"ASS: "<<field[wormAss]<<" HEAD: "<<field[wormHead]<<endl;
-            if (field[wormHead] >= field[wormAss]) {
+            if (field[wormHead] >= field[wormTail]) {
                 checkCapacity();
                 break;
             }

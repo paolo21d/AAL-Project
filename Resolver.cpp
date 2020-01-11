@@ -17,7 +17,6 @@ long long int Resolver::resultTime(int argLength, int *argField) {
 }
 void Resolver::checkCapacity() {
     int capacity = getCurrentCapacity();
-    //cout << "CheckCapacity: length " << lengthOfWorm() << " minWorm " << minWorm() << " capacity " << capacity << endl;
     if (capacity > maxCapacity)
         maxCapacity = capacity;
 }
@@ -25,8 +24,8 @@ int Resolver::getCurrentCapacity() {
     return minWorm() * lengthOfWorm();
 }
 int Resolver::lengthOfWorm() {
-    return wormHead - wormAss;
+    return wormHead - wormTail;
 }
 int Resolver::minWorm() {
-    return min(field[wormHead], field[wormAss]);
+    return min(field[wormHead], field[wormTail]);
 }
