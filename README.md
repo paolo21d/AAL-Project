@@ -68,4 +68,4 @@ Aby uzyskać rozwiązanie problemu należy podać dane:
     Złożoność teoretyczna tego rozwiązania jest kwadratowa. Jednak podczas testów pomiary czasu wykonania wskazują na złożoność liniową.<br/>
     Powodem tego jest to, że złożoność kwadratowa jest złożonością pesymistyczną, występującą tylko dla przypadku gdy dolina zajmuje znaczą część pola
     tzn. jest niewielka ilość dolin, a każda o dużej szerokości. W przypadkach testowych zwykle wychodziło wiele dolin o niewielkiej szerokości każda.
-    Dlatego też średnio złożoność tego rozwiązania wychodzi liniowa, jednak z o wiele większym współczynnkiem(nachylenie prostej jest znacznie bardziej pionowe) niż w przypadku algorytmu optymalnego/ 
+    Dlatego też średnio złożoność tego rozwiązania wychodzi liniowa, jednak z o wiele większym współczynnikiem(nachylenie prostej jest znacznie bardziej pionowe) niż w przypadku algorytmu optymalnego/ 
