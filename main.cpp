@@ -189,7 +189,7 @@ void bothStepTimer(int offset, int maxHeight, int stepSize, int quantityOfSteps,
 		optimalTimes[i] = times.first;
 		optimalExpectedTimes[i] = step;
 		brutforceTimes[i] = times.second;
-		brutforceExpectedTimes[i] = step * step;
+		brutforceExpectedTimes[i] = step;
 	}
 
 	cout << "OPTIMAL: length\ttime[ms]\tQ[n]" << endl;
